@@ -68,5 +68,11 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-  } catch (error) {}
+    res.cookie("jwt", "", { maxAge: 0 });
+
+    return res.status(200).json({ message: "log out sucessully" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ messge: "internal errors", message: error.message });
+  }
 };
