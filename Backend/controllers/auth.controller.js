@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import genaratetoken from "../utils/genaratetoken.js";
 
 export const signup = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ export const signup = async (req, res) => {
     });
 
     await newuser.save();
-
+    genaratetoken(newuser._id, res);
     res.status(200).json({
       _id: newuser._id,
       fullname: newuser.fullname,
