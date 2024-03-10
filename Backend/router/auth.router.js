@@ -5,6 +5,6 @@ const Router = express.Router();
 
 Router.post("/singup", signup);
 Router.post("/login", login);
-Router.get("/logout", logout);
+Router.post("/logout", logout);
 
 export default Router;
