@@ -1,10 +1,13 @@
-export const signup = (req, res) => {
-  res.send("signup function");
+export const signup = async (req, res) => {
+  try {
+  } catch (erros) {}
 };
-export const login = (req, res) => {
-  res.send("loginfunction");
+export const login = async (req, res) => {
+  try {
+  } catch (errors) {}
 };
 
-export const logout = (req, res) => {
-  res.send("logoutfunction");
+export const logout = async (req, res) => {
+  try {
+  } catch (error) {}
 };
