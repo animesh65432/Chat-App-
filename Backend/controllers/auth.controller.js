@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
 import genaratetoken from "../utils/genaratetoken.js";
 
 export const signup = async (req, res) => {
@@ -43,7 +44,26 @@ export const signup = async (req, res) => {
 };
 export const login = async (req, res) => {
   try {
-  } catch (errors) {}
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const ispasswordcorrect = bcrypt.compare(password, user?.password || "");
+
+    if (!user || !ispasswordcorrect) {
+      return res.status(404).json({ message: "invaild username and password" });
+    }
+
+    genaratetoken(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      fullname: user.fullname,
+      username: user.username,
+      profilepic: user.profilepic,
+    });
+  } catch (errors) {
+    console.log(errors.message);
+    res.status(500).json({ messge: "internal errors", message: erros.message });
+  }
 };
 
 export const logout = async (req, res) => {
