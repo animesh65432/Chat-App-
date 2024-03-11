@@ -2,6 +2,8 @@ import { useState } from "react";
 import GenderCheckbox from "./Genderbox";
 import { Link } from "react-router-dom";
 import useSignup from "../../hooks/useSignup.js";
+import { addtolocalstorage } from "../../context/LoginSlice.js";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -12,15 +14,18 @@ const SignUp = () => {
     gender: "",
   });
   const { loading, signup } = useSignup();
+  const dispatch = useDispatch();
 
   const onGenderChange = (gender) => {
     setInputs({ ...inputs, gender: gender });
   };
 
-  const onSubmitHandler = (e) => {
-    console.log(inputs);
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    signup(inputs);
+    let res = await signup(inputs);
+    if (res) {
+      dispatch(addtolocalstorage(inputs));
+    }
   };
 
   return (

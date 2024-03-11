@@ -34,9 +34,11 @@ const useSignup = () => {
       });
 
       toast.success("Successfully Created My Account");
+      return true;
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
+      return false;
     } finally {
       setLoading(false);
     }
