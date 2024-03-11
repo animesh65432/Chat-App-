@@ -20,7 +20,10 @@ function App() {
             path="/Singup"
             element={chatuser ? <Navigate to="/" /> : <SignUp />}
           ></Route>
-          <Route path="/Login" element={<Login />}></Route>
+          <Route
+            path="/Login"
+            element={chatuser ? <Navigate to="/" /> : <Login />}
+          ></Route>
         </Routes>
       </div>
       <Toaster />

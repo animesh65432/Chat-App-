@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addtolocalstorage } from "../context/LoginSlice";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const signup = async ({
     fullname,
@@ -33,7 +36,17 @@ const useSignup = () => {
         gender,
       });
 
+      console.log(data);
+
       toast.success("Successfully Created My Account");
+      dispatch(
+        addtolocalstorage({
+          fullname: fullname,
+          username: username,
+          password: password,
+          gender: gender,
+        })
+      );
       return true;
     } catch (error) {
       console.log(error.message);
