@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const connecttomonogodb = async () => {
+const connectToMongoDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_DB_URL);
-    console.log("connect to monogdb");
-  } catch (errors) {
-    console.log(errors);
+    await mongoose.connect(`mongodb://127.0.0.1:27017/PROJECT`);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.log("Error connecting to MongoDB", error.message);
   }
 };
 
-export default connecttomonogodb;
+export default connectToMongoDB;
